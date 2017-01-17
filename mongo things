@@ -1,0 +1,83 @@
+ cd /lib/systemd/system/
+
+and then type mongo
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+db.products.insert([
+
+{ _id: 1, category: "monitor", item: "dell monitor", qty: 50, url: "http://images.anandtech.com/doci/8496/MaxPNG%20(2).png" },
+
+{ _id: 2, category: "speakers", item: "mercury speakers", qty: 50, url: "http://img09.deviantart.net/452d/i/2010/320/1/0/mercury_speakers_by_ksouthv2-d32zas0.jpg" },
+
+{ _id: 3, category: "tablets", item: "google tablet", qty: 50, url: "https://i0.wp.com/buybesttablets2015.com/wp-content/uploads/2014/12/google-nexus-9-for-20151-e1423092466269.jpg" }
+
+])
+
+
+
+
+
+
+use shops
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Product.find().distinct('category',function (err, results) {
+          console.log(JSON.stringify(results));
+          for (var i in results) {
+              console.log(results[i]);
+          }
+      });
+
+
+4242424242424242

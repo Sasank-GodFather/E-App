@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>{{title}}</title>
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+      <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+      <link rel='stylesheet' href='/stylesheets/style.css'/>
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+      
+      
+  </head>
+  <body>
+      <div class="background-video">
+    <video id="bg-vid" preload="auto" autoplay="true" loop="true" muted="muted">
+        <source src="assets/Test Website Background Video.mp4" type="video/mp4">
+        video not supported
+    </video>
+</div>
+      <div class="container">
+          {{> header }}
+          <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+          
+          <div class="container">
+              {{{body}}}
+          </div>
+      </div>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+      <script type="text/javascript">
+          $(document).ready(function() {
+              $("input[name$='optradio']").click(function() {
+                  var test = $(this).val();
+                  if(test == 'cod'){                         
+                      $("div.carddetails").hide();
+                  }
+                  else {
+                      $("div.carddetails").show();
+                  }
+              });
+          });
+          function searchToggle(obj, evt){
+            var container = $(obj).closest('.search-wrapper');
+
+            if(!container.hasClass('active')){
+                  container.addClass('active');
+                  evt.preventDefault();
+            }
+            else if(container.hasClass('active') && $(obj).closest('.input-holder').length == 0){
+                  container.removeClass('active');
+                  // clear input
+                  container.find('.search-input').val('');
+                  // clear and hide result container when we press close
+                  container.find('.result-container').fadeOut(100, function(){$(this).empty();});
+            }
+        }
+
+        function submitFn(obj, evt){
+           value = $(obj).find('.search-input').val().trim();
+
+           _html = "Yup yup! Your search text sounds like this: ";
+            if(!value.length){
+                _html = "Yup yup! Add some text friend :D";
+            }
+          
+                _html += "<b>" + value + "</b>";
+            
+            
+
+            $(obj).find('.result-container').html('<span>' + _html + '</span>');
+            $(obj).find('.result-container').fadeIn(100);
+            evt.preventDefault();
+            
+            window.location.href = '/searchthis/'+value;
+        }
+      </script>    
+    </body>
+</html>

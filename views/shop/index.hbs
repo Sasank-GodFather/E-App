@@ -1,0 +1,33 @@
+<div class="row">
+    <div class="col-sm-6 col-md-4 col-md-offset-4 col-sm-offset-3">
+        <div id="success" class="alert alert-success" {{#if noMessage}}hidden{{/if}}>
+            {{ successMsg }}
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 fadeInDown animated" style="border-right: 1px solid white;">
+            <a id="anchor" class="fadeInDown animated" href="/allproducts" style="color:white; font-size: 50px; text-decoration: none;" >All
+                products</a>
+            <br>{{# each categories}}
+            <a id="anchor" class="fadeInDown animated" href="{{this}}" style="color:white; font-size: 50px; text-decoration: none;">{{this}}</a><br>
+            {{/each}}
+        </div>
+        <div class="col-md-6">
+            <form method="post" action="/searchthis" class="searchcontent" onsubmit="submitFn(this, event);" >
+                <div class="search-wrapper">
+                    <div class="input-holder">
+                        <input name="searchthis" type="text" class="search-input" placeholder="Type to search"/>
+                        <button type="submit" class="search-icon" onclick="searchToggle(this, event);"><span></span></button>
+                    </div>
+                    <span onclick="searchToggle(this, event);"></span>
+                    <span class="close" onclick="searchToggle(this, event);"></span>
+                    <div class="result-container">
+                    </div>
+                </div>                
+            </form>
+        </div>
+    </div>
+</div>
