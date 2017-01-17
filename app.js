@@ -15,7 +15,7 @@ var MongoStore = require('connect-mongo')(session);
 
 var app = express();
 
-mongoose.connect('localhost:27017/store');
+mongoose.connect('mongodb://userNSR:YFgYDopD65FvcHYE@mongodb/sampledb');
 
 app.use('/assets', express.static('assets'));
 
