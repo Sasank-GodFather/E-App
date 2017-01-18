@@ -17,6 +17,17 @@ router.get('/', function(req, res, next) {
 
 });
 
+router.post('/add', function(req, res, next) {
+    
+    var product = JSON.parse(req.body.db_data);
+    console.log(product);
+    Product.insertMany(product, function(err, result){
+        res.redirect('/');
+    });
+});
+
+
+
 
 router.get('/allproducts', function(req, res, next) {
     Product.find(function (err, docs) {
