@@ -5,6 +5,7 @@ var Cart = require('../models/cart');
 var Order = require('../models/order');
 var nodemailer = require('nodemailer');
 var twilio = require('twilio');
+var sg = require('sendgrid')(process.env.SENDGRID_API_KEY);
 
 router.get('/', function(req, res, next) {
     
@@ -159,7 +160,7 @@ router.get('/track-order',function(req, res, next) {
     res.render('shop/track-order');
 });
 
-router.post('/track-order',function(req, res, next){
+/*router.post('/track-order',function(req, res, next){
     var name = req.body.name;
     var email = req.body.email;
     var phone = req.body.phonenumber;
@@ -198,7 +199,60 @@ router.post('/track-order',function(req, res, next){
            
         }
     });
-});
+});*/
+
+router.post('/track-order',function(req, res, next){
+    var name = req.body.name;
+    var email = req.body.email;
+    var phone = req.body.phonenumber;
+    var request = sg.emptyRequest({
+        method: 'POST',
+        path: '/v3/mail/send',
+        body: {
+            personalizations: [
+                {
+                    to: [
+                        {
+                            email: email,
+                        },
+                    ],
+                    subject: 'Hello World from the SendGrid Node.js Library!',
+                },
+            ],
+            from: {
+                email: 'sasankkothe@gmail.com',
+            },
+            content: [
+                {
+                    type: 'text/plain',       
+                    value: 'Hello, Email!',
+                },
+            ],
+        },
+    });
+    
+    //With promise
+    sg.API(request)
+        .then(response => {
+        console.log(response.statusCode);
+        console.log(response.body);
+        console.log(response.headers);
+    })
+        .catch(error => {
+        //error is an instance of SendGridError
+        //The full response is attached to error.response
+        console.log(error.response.statusCode);
+    });
+    //With callback
+    sg.API(request, function(error, response) {
+        if (error) {
+            console.log('Error response received');
+        }
+        console.log(response.statusCode);
+        console.log(response.body);
+        console.log(response.headers);
+    });
+}):
 
 router.get('/searchthis/:search', function(req, res, next){
     var search = req.params.search;
