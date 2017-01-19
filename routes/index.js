@@ -170,15 +170,15 @@ router.post('/track-order',function(req, res, next){
         }
         else {
             var transporter = nodemailer.createTransport({
-                service: 'smtp.mailgun.org',
+                service: 'hotmail',
                 auth: {
-                    user: 'postmaster@appa9c6bf2f9dfb4ba1b6578b76c0b45632.mailgun.org',
-                    pass: 'bdcf696ee3c00ab05f83ca5bea6a38bc '
+                    user: process.env.CRAWLER_MAIL,
+                    pass: process.env.CRAWLER_PWD
                 }
             });
             
             var mailOptions = {
-                from: 'E-Commerce <postmaster@appa9c6bf2f9dfb4ba1b6578b76c0b45632.mailgun.org>',
+                from: 'E-Commerce',
                 to: email,
                 subject: 'Track Your Order',
                 text: 'Your order: ',
