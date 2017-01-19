@@ -216,7 +216,7 @@ router.post('/track-order',function(req, res, next){
                             email: email,
                         },
                     ],
-                    subject: 'Hello World from the SendGrid Node.js Library!',
+                    subject: 'Tracking Details',
                 },
             ],
             from: {
@@ -225,29 +225,31 @@ router.post('/track-order',function(req, res, next){
             content: [
                 {
                     type: 'text/plain',       
-                    value: 'Hello, Email!',
+                    value: 'Your order is on the way..!!',
                 },
             ],
         },
     });
     
     //With promise
-    sg.API(request)
+    /*sg.API(request)
         .then(response => {
         console.log(response.statusCode);
         console.log(response.body);
         console.log(response.headers);
+        
     })
         .catch(error => {
         //error is an instance of SendGridError
         //The full response is attached to error.response
         console.log(error.response.statusCode);
-    });
+    });*/
     //With callback
     sg.API(request, function(error, response) {
         if (error) {
             console.log('Error response received');
         }
+        res.redirect('/');
         console.log(response.statusCode);
         console.log(response.body);
         console.log(response.headers);
