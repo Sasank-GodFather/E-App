@@ -15,7 +15,7 @@ var MongoStore = require('connect-mongo')(session);
 
 var app = express();
 
-mongoose.connect('mongodb://userNSR:YFgYDopD65FvcHYE@mongodb/sampledb');
+mongoose.connect('mongodb://store:store@ds117819.mlab.com:17819/heroku_dxr4gf8l');
 
 app.use('/assets', express.static('assets'));
 
